@@ -1,9 +1,7 @@
-import Image from "next/image";
+import Jumboard from "@/components/Jumboard";
 
 export default function Home() {
-  return (
-    <main className="h-svh">
-      
-    </main>
-  );
+  return <main className="h-svh relative">
+    <Jumboard />
+  </main>;
 }

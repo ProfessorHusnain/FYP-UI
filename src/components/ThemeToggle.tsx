@@ -3,7 +3,7 @@ import React, { use, useEffect } from "react";
 import { FaMoon } from "react-icons/fa";
 import { BsSunFill } from "react-icons/bs";
 import { MdMonitor } from "react-icons/md";
-import { useAppContext } from "@/hooks/AppContext";
+import { useAppContext } from "@/context/AppContext";
 // this is the component that will be used to toggle the theme with respect to the user's preference for light or dark or system default
 const ThemeToggle = () => {
   const { metaData, setMetaData } = useAppContext();
@@ -17,15 +17,6 @@ const ThemeToggle = () => {
     }
   };
 
-  useEffect(() => {
-    if (metaData.theme === "dark") {
-      document.documentElement.classList.add("dark");
-      console.log("dark");
-    } else {
-      console.log("light"); 
-      document.documentElement.classList.remove("dark");
-    }
-  }, [metaData.theme]);
 
   return (
     <div
