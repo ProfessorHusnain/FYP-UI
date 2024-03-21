@@ -83,4 +83,33 @@
   .-delay-1600 {
     animation-delay: -1.6s;
   }
+  .nav-list {
+    @apply list-none mb-0;
+  }
+  .nav-list li {
+    @apply block py-2 px-4 rounded-t-xl text-medium dark:text-light font-bold cursor-pointer w-full text-center mx-1;
+  }
+  .nav-list li.active {
+    view-transition-name: navActiveTab;
+    @apply dark:bg-medium bg-light relative transition-all duration-100 ease-in-out;
+  }
+  ::view-transition(navActiveTab) {
+    animation-duration: 1.5s;
+  }
+  .nav-list li.active::before,
+  .nav-list li.active::after {
+    --border-radius: 1rem;
+    @apply content-[''] absolute w-[var(--border-radius)] h-[var(--border-radius)]
+     bg-white dark:bg-gray-900;
+  }
+  .nav-list li.active::before {
+    bottom: calc(var(--border-radius) * 0);
+    left: calc(var(--border-radius) * -0.993);
+    @apply rounded-br-xl shadow-[8px_8px_5px_1px] dark:shadow-medium shadow-light;
+  }
+  .nav-list li.active::after {
+    bottom: calc(var(--border-radius) * 0);
+    right: calc(var(--border-radius) * -0.999);
+    @apply rounded-bl-xl shadow-[-8px_7px_5px_1px] dark:shadow-medium shadow-light;
+  }
 }

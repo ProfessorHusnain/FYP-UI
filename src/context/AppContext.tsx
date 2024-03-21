@@ -7,7 +7,11 @@ interface IAppContext {
   metaData: MetaData;
   auth: Auth;
   user: User;
+  isDrawerOpen: boolean;
+  isProfileMenuOpen: boolean;
   isLoading: boolean;
+  setIsProfileMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsDrawerOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
   setUser: React.Dispatch<React.SetStateAction<User>>;
   setAuth: React.Dispatch<React.SetStateAction<Auth>>;
@@ -20,10 +24,12 @@ const AppProvider = ({ children }: { children: React.ReactNode }) => {
   const [metaData, setMetaData] = useState<MetaData>({
     theme: "",
   });
+  const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
+  const [isProfileMenuOpen, setIsProfileMenuOpen] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [user, setUser] = useState<User>({username:"",password:""});
+  const [user, setUser] = useState<User>({ username: "", password: "" });
   const [auth, setAuth] = useState<Auth>({ accessToken: "" });
-  
+
   useEffect(() => {
     const Theme = () => {
       const prefersDarkMode = window.matchMedia(
@@ -48,7 +54,22 @@ const AppProvider = ({ children }: { children: React.ReactNode }) => {
   }, [metaData.theme]);
 
   return (
-    <AppContext.Provider value={{ metaData, setMetaData,auth,setAuth,user,setUser,isLoading,setIsLoading }}>
+    <AppContext.Provider
+      value={{
+        metaData,
+        setMetaData,
+        auth,
+        setAuth,
+        user,
+        setUser,
+        isLoading,
+        setIsLoading,
+        isDrawerOpen,
+        setIsDrawerOpen,
+        isProfileMenuOpen,
+        setIsProfileMenuOpen,
+      }}
+    >
       {children}
     </AppContext.Provider>
   );

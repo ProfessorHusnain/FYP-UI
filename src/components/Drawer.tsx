@@ -1,10 +1,15 @@
+"use client";
+import { useAppContext } from "@/context/AppContext";
 import React from "react";
 
 const Drawer = () => {
+  const { isDrawerOpen, setIsDrawerOpen } = useAppContext();
   return (
     <div
       id="drawer-disable-body-scrolling"
-      className="fixed top-0 left-0 z-40 h-screen p-4 overflow-y-auto transition-transform -translate-x-full bg-white w-64 dark:bg-gray-800"
+      className={`fixed top-0 left-0 z-40 h-screen p-4 overflow-y-auto transition-transform ${
+        !isDrawerOpen && "-translate-x-full"
+      } bg-white w-64 dark:bg-gray-800`}
       tabIndex={-1}
       aria-labelledby="drawer-disable-body-scrolling-label"
     >
@@ -18,6 +23,7 @@ const Drawer = () => {
         type="button"
         data-drawer-hide="drawer-disable-body-scrolling"
         aria-controls="drawer-disable-body-scrolling"
+        onClick={() => setIsDrawerOpen(!isDrawerOpen)}
         className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 end-2.5 inline-flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white"
       >
         <svg

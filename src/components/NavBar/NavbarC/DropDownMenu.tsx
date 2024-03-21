@@ -1,7 +1,7 @@
+import exp from "constants";
 import { TiTick } from "react-icons/ti";
 
 const DropDownMenu = ({ IsDrawerOpen }: { IsDrawerOpen: boolean }) => {
- 
   return (
     <div
       className={`${
@@ -83,31 +83,36 @@ const ListItem = ({
   active = false,
   setActive,
   id,
+  onClick,
+  picReqiured = true,
 }: {
   title: string;
   href: string;
   id?: string;
+  picReqiured?: boolean;
   active?: boolean;
-  setActive?: React.Dispatch<React.SetStateAction<string>>;
+  onClick?: (e:any) => void;
+  setActive?: (id: string) => void;
 }) => {
   return (
-    <li id={id} value={id} onClick={(e) => alert(e.target)}>
-      <div className="flex cursor-pointer items-center ps-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-        <div className="relative w-5 h-5 flex justify-center   bg-gray-100 rounded-full dark:bg-gray-600">
-          <svg
-            className=" w-4 h-4 text-gray-400"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fillRule="evenodd"
-              d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-              clipRule="evenodd"
-            ></path>
-          </svg>
-        </div>
-
+    <li id={id} value={id} onClick={(e) => onClick && onClick(e)}>
+      <div className="flex cursor-pointer items-center ps-2 rounded hover:bg-gray-200 dark:hover:bg-gray-600">
+        {picReqiured && (
+          <div className="relative w-5 h-5 flex justify-center   bg-gray-100 rounded-full dark:bg-gray-600">
+            <svg
+              className=" w-4 h-4 text-gray-400"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fillRule="evenodd"
+                d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                clipRule="evenodd"
+              ></path>
+            </svg>
+          </div>
+        )}
         <span className="w-full py-2 ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">
           {title}
         </span>
@@ -116,5 +121,5 @@ const ListItem = ({
     </li>
   );
 };
-
+export { List, ListItem };
 export default DropDownMenu;
