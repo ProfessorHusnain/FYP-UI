@@ -15,11 +15,15 @@ const DestopMenu = () => {
             className={`${
               pathname === `/dashboard/${item.toLocaleLowerCase()}`
                 ? "active"
-                : (pathname === "/dashboard" && item === "Home") && "active"
+                : pathname === "/dashboard" &&
+                  item === navbarMenu[0] &&
+                  "active"
             }`}
           >
             <Link
-              href={`/dashboard/${item === "Home" ? "" : item.toLowerCase()}`}
+              href={`/dashboard/${
+                item === navbarMenu[0] ? "" : item.toLowerCase()
+              }`}
               className="nav-link"
             >
               {item}
