@@ -1,7 +1,8 @@
 "use client";
 import React from "react";
-import { List, ListItem } from "../NavbarC/DropDownMenu";
 import Image from "next/image";
+import ProfileNavMenu from "./ProfileNavMenu";
+
 const ProfileNavIcon = () => {
   const [isProfileNavOpen, setIsProfileNavOpen] = React.useState(false);
   return (
@@ -33,55 +34,3 @@ const ProfileNavIcon = () => {
 };
 
 export default ProfileNavIcon;
-
-const ProfileMenu = ["Profile", "Settings", "New Relation"];
-
-const ProfileNavMenu = ({
-  IsProfileNavOpen,
-  setIsProfileNavOpen,
-}: {
-  IsProfileNavOpen: boolean;
-  setIsProfileNavOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}) => {
-  return (
-    <div
-      className={`${
-        IsProfileNavOpen ? "absolute" : "hidden"
-      } right-0 z-10 mt-4 w-60 origin-top-right bg-white rounded-md shadow-lg dark:bg-gray-800 ring-1 ring-black ring-opacity-5 focus:outline-none border border-gray-200 dark:border-gray-600`}
-      role="menu"
-      aria-orientation="vertical"
-      aria-labelledby="options-menu"
-    >
-      <label className="px-4  text-sm  text-gray-800 dark:text-gray-300">
-        <span className="font-bold mt-2 ">username</span>
-        <br />
-        <span className="px-4 mb-2">email@gmail.com</span>
-      </label>
-      <div className="border-t border-gray-200 dark:border-gray-600">
-        <List>
-          {ProfileMenu.map((item, index) => (
-            <ListItem
-              title={item}
-              href="/"
-              active={false}
-              picReqiured={false}
-              key={index}
-              onClick={() => setIsProfileNavOpen(!IsProfileNavOpen)}
-            />
-          ))}
-        </List>
-        <div className="border-t border-gray-200 dark:border-gray-600">
-          <List>
-            <ListItem
-              title="Log out"
-              href="/"
-              active={false}
-              picReqiured={false}
-              onClick={() => setIsProfileNavOpen(!IsProfileNavOpen)}
-            />
-          </List>
-        </div>
-      </div>
-    </div>
-  );
-};

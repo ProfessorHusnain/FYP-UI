@@ -51,7 +51,12 @@ const DropDownMenu = ({ IsDrawerOpen }: { IsDrawerOpen: boolean }) => {
               <label className="px-1 text-sm mb-[2px] text-gray-800 dark:text-gray-300">
                 Personal Account
               </label>
-              <ListItem title="Defulat user" href="/" active />
+              <ListItem
+                title="Defulat user"
+                href="/"
+                active
+                onClick={() => {}}
+              />
             </List>
           </div>
           <div className="border-t border-gray-200 dark:border-gray-600">
@@ -59,10 +64,10 @@ const DropDownMenu = ({ IsDrawerOpen }: { IsDrawerOpen: boolean }) => {
               <label className="px-1 text-sm mb-[2px] text-gray-800 dark:text-gray-300">
                 Child Accounts
               </label>
-              <ListItem title="Messages" href="/" />
-              <ListItem title="Notifications" href="/" />
-              <ListItem title="Settings" href="/" />
-              <ListItem title="Support" href="/" />
+              <ListItem title="Messages" href="/" onClick={() => {}} />
+              <ListItem title="Notifications" href="/" onClick={() => {}} />
+              <ListItem title="Settings" href="/" onClick={() => {}} />
+              <ListItem title="Support" href="/" onClick={() => {}} />
             </List>
           </div>
         </div>
@@ -91,11 +96,11 @@ const ListItem = ({
   id?: string;
   picReqiured?: boolean;
   active?: boolean;
-  onClick?: (e:any) => void;
+  onClick: (event: React.MouseEvent<HTMLLIElement>) => void;
   setActive?: (id: string) => void;
 }) => {
   return (
-    <li id={id} value={id} onClick={(e) => onClick && onClick(e)}>
+    <li value={href} onClick={(e) => onClick(e)}>
       <div className="flex cursor-pointer items-center ps-2 rounded hover:bg-gray-200 dark:hover:bg-gray-600">
         {picReqiured && (
           <div className="relative w-5 h-5 flex justify-center   bg-gray-100 rounded-full dark:bg-gray-600">

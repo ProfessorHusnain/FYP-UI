@@ -4,5 +4,10 @@
     "description": "Digital ID is a concept that are going to replace the traditional ID card with a digital ID card."
   },
 
-  "navbarMenu": ["Home", "About", "Services", "Contact"]
+  "navbarMenu": ["Home", "About", "Services", "Contact"],
+  "ProfileMenu": [
+    { "name": "Profile", "href": "/dashboard/user/profile" },
+    { "name": "Settings", "href": "/dashboard/user/settings" },
+    { "name": "New Relation", "href": "/dashboard/relation" }
+  ]
 }
