@@ -5,6 +5,7 @@ import LineChart from "@/components/charts/LineChart";
 import compareDates from "@/utils";
 import BarChart from "./charts/BarChart";
 const Dashboard = () => {
+  const [data, setData] = React.useState(false);
   const btn = () => {
     // Example usage:
     const date1 = new Date("2024-03-25T08:00:00");
@@ -21,16 +22,20 @@ const Dashboard = () => {
       });
     });
   };
+
   return (
     <div>
-      <div className="flex flex-col items-center md:flex-row gap-5">
-        <Card title="Yearly Report of Indentity">
-          <BarChart />
-        </Card>
-        <Card title="Monthly Report of Indentity">
-          <LineChart />
-        </Card>
-      </div>
+      <button onClick={() => setData(!data)}>Click</button>
+      {data && (
+        <div className="flex flex-col items-center md:flex-row gap-5">
+          <Card title="Yearly Report of Indentity">
+            <BarChart />
+          </Card>
+          <Card title="Monthly Report of Indentity">
+            <LineChart />
+          </Card>
+        </div>
+      )}
     </div>
   );
 };

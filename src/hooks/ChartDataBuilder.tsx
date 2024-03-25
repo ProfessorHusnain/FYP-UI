@@ -1,10 +1,21 @@
 "use client";
 
 import { useState } from "react";
-
 const useChartDataBuilder = () => {
+  
   const [hey, setHey] = useState();
-
+  function generateRandomArray(
+    length: number,
+    min: number,
+    max: number
+  ): number[] {
+    const randomArray: number[] = [];
+    for (let i = 0; i < length; i++) {
+      const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+      randomArray.push(randomNumber);
+    }
+    return randomArray;
+  }
   const backgroundColor = [
     "rgba(255, 99, 132, 0.2)",
     "rgba(54, 162, 235, 0.2)",
@@ -41,7 +52,8 @@ const useChartDataBuilder = () => {
     plugins,
     backgroundColor,
     borderColor,
-    hey
+     
+    generateRandomArray,
   };
 };
 

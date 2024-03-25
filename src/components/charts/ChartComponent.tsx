@@ -33,7 +33,7 @@ const ChartComponent: React.FC<ChartComponentProps> = ({
        };
   }, [data, options, type]);
 
-  return <canvas ref={chartRef} />;
+  return <canvas className="w-2 h-96" ref={chartRef} />;
 };
 
 export default ChartComponent;

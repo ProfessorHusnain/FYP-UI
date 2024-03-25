@@ -4,6 +4,7 @@ import { Auth, MetaData, User } from "@/types";
 import React, { createContext, useEffect, useState } from "react";
 
 interface IAppContext {
+  chartColor: string;
   metaData: MetaData;
   auth: Auth;
   user: User;
@@ -29,7 +30,7 @@ const AppProvider = ({ children }: { children: React.ReactNode }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [user, setUser] = useState<User>({ username: "", password: "" });
   const [auth, setAuth] = useState<Auth>({ accessToken: "" });
-
+  const [chartColor, setChartColor] = useState<string>("#293245");
   useEffect(() => {
     const Theme = () => {
       const prefersDarkMode = window.matchMedia(
@@ -48,7 +49,9 @@ const AppProvider = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     if (metaData.theme === "dark") {
       document.documentElement.classList.add("dark");
+      setChartColor("rgb(226 232 240)");
     } else if (metaData.theme === "light") {
+      setChartColor("#232A3C");
       document.documentElement.classList.remove("dark");
     }
   }, [metaData.theme]);
@@ -56,6 +59,7 @@ const AppProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <AppContext.Provider
       value={{
+        chartColor,
         metaData,
         setMetaData,
         auth,

@@ -4,27 +4,16 @@ import ChartComponent from "./ChartComponent";
 import { Suspense } from "react";
 import compareDates from "@/utils";
 import useChartDataBuilder from "@/hooks/ChartDataBuilder";
+import { useAppContext } from "@/context/AppContext";
 const data = compareDates(
   new Date("2024-03-25T08:00:00"),
   new Date("2024-04-02T18:00:00")
 );
 
-function generateRandomArray(
-  length: number,
-  min: number,
-  max: number
-): number[] {
-  const randomArray: number[] = [];
-  for (let i = 0; i < length; i++) {
-    const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
-    randomArray.push(randomNumber);
-  }
-  console.log(randomArray);
-  return randomArray;
-}
-
 const LineChart = () => {
-  const { plugins, backgroundColor, borderColor } = useChartDataBuilder();
+  const { chartColor } = useAppContext();
+  const { plugins, backgroundColor, borderColor, generateRandomArray } =
+    useChartDataBuilder();
   const LineChartData = {
     type: "line",
     data: {
@@ -33,8 +22,13 @@ const LineChart = () => {
         {
           label: "Card Created Time",
           data: generateRandomArray(data.x_axis.length, 0, 100),
-          backgroundColor: backgroundColor,
-          borderColor: borderColor,
+          backgroundColor: [backgroundColor],
+          borderColor: [backgroundColor],
+          pointBackgroundColor: chartColor,
+          pointStyle: "circle",
+          pointRadius: 5,
+          pointHoverRadius: 8,
+          pointBorderColor: "red",
           borderWidth: 3,
           fill: true,
         },
@@ -45,12 +39,12 @@ const LineChart = () => {
       responsive: true,
       animations: {
         tension: {
-          duration: 8000,
+          duration: 1000,
           easing: "linear",
           from: 1,
           to: 0,
           loop: true,
-          delay: 1000,
+          //delay: 1000,
         },
       },
       scales: {

@@ -5,13 +5,21 @@ import { Suspense } from "react";
 import compareDates from "@/utils";
 import { useNavigation } from "@/hooks/AppContext";
 import useChartDataBuilder from "@/hooks/ChartDataBuilder";
+import { useAppContext } from "@/context/AppContext";
 const data = compareDates(
   new Date("2024-03-25T08:00:00"),
   new Date("2024-07-02T18:00:00")
 );
 
 const BarChart = () => {
-  const { plugins, backgroundColor, borderColor, hey } = useChartDataBuilder();
+  let delayed: any;
+  const{chartColor} = useAppContext()
+      const prefersDarkMode = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches;
+  const { plugins, backgroundColor, borderColor, generateRandomArray } =
+    useChartDataBuilder();
+  
   const BarChartData = {
     type: "bar",
     data: {
@@ -19,25 +27,33 @@ const BarChart = () => {
       datasets: [
         {
           label: "Scanned",
-          data: [12, 19, 3, 5, 2, 3],
-          backgroundColor: backgroundColor,
-          borderColor: borderColor,
-          borderWidth: 3,
+          data: generateRandomArray(data.x_axis.length, 0, 100),
+          backgroundColor: [chartColor],
+          borderColor: [chartColor],
+          borderWidth: 1,
           fill: true,
+          borderRadius: 10,
+          //borderSkipped: false,
         },
       ],
     },
     options: {
       maintainAspectRatio: false,
       responsive: true,
-      animations: {
-        tension: {
-          duration: 8000,
-          easing: "linear",
-          from: 1,
-          to: 0,
-          loop: true,
-          delay: 1000,
+      animation: {
+        onComplete: () => {
+          delayed = true;
+        },
+        delay: (context: any) => {
+          let delay = 0;
+          if (
+            context.type === "data" &&
+            context.mode === "default" &&
+            !delayed
+          ) {
+            delay = context.dataIndex * 300 + context.datasetIndex * 100;
+          }
+          return delay;
         },
       },
       scales: {
