@@ -112,6 +112,25 @@
     right: calc(var(--border-radius) * -0.999);
     @apply rounded-bl-xl shadow-[-8px_7px_5px_1px] dark:shadow-medium shadow-light;
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
   ----------------------------------- .user-navigation {
     @apply list-none;
   }
@@ -141,4 +160,17 @@
     right: calc(var(--border-radius) * 0.3);
     @apply rounded-tr-xl shadow-[8px_-8px_5px_1px] dark:shadow-medium shadow-light;
   }
+
+
+  .dynamic-textarea {
+  overflow: hidden; /* Hide overflow content */
+  resize: none; /* Disable resizing */
+  border: 1px solid #ccc; /* Add border */
+  padding: 8px; /* Add padding */
+  width: 100%; /* Set width to 100% */
+  min-height: 40px; /* Set minimum height */
+  font-size: 16px; /* Set font size */
+  line-height: 1.4; /* Set line height */
+}
+
 }

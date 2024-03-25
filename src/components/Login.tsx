@@ -4,6 +4,7 @@ import React from "react";
 import metaData from "../dictionaries/globals.json";
 import { POST } from "@/lib/CommunicationHelper";
 import { useNavigation } from "@/hooks/AppContext";
+import TextBox from "./common/TextBox";
 
 const Login = () => {
   const { user, setUser, setIsLoading } = useAppContext();
@@ -49,42 +50,22 @@ const Login = () => {
         <h5 className="text-xl font-medium text-gray-900 dark:text-white">
           Sign in to {App.name}
         </h5>
-        <div>
-          <label
-            htmlFor="username"
-            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-          >
-            username
-          </label>
-          <input
-            type="text"
-            name="username"
-            id="username"
-            onChange={handleInputChange}
-            value={user?.username}
-            placeholder="username"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-            required
-          />
-        </div>
-        <div>
-          <label
-            htmlFor="password"
-            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-          >
-            password
-          </label>
-          <input
-            type="password"
-            name="password"
-            id="password"
-            onChange={handleInputChange}
-            value={user?.password}
-            placeholder="••••••••"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-            required
-          />
-        </div>
+
+        <TextBox
+          name="username"
+          type="text"
+          onChange={handleInputChange}
+          value={user?.username}
+          IsRequired={true}
+        />
+        <TextBox
+          name="password"
+          placeholder="••••••••"
+          type="password"
+          onChange={handleInputChange}
+          value={user?.password}
+          IsRequired={true}
+        />
         <div className="flex items-start">
           <div className="flex items-start">
             <div className="flex items-center h-5">

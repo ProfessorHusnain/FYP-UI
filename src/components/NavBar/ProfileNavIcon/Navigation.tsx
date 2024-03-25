@@ -6,7 +6,7 @@ import React from "react";
 const Navigation = () => {
   const { pathname } = useNavigation();
   return (
-    <div className="cursor-pointer md:max-w-[15rem]  w-full px-4 md:px-0 md:ps-4 py-4 ">
+    <div className="md:max-w-[15rem]  w-full px-4 md:px-0 md:ps-4 py-4 ">
       <ul className="flex flex-col text-center gap-y-2 user-navigation">
         <li
           className={`${
