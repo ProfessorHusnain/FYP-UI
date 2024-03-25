@@ -1,6 +1,8 @@
 import Dashboard from "@/components/Dashboard";
 import LineChart from "@/components/charts/LineChart";
+
 const page = () => {
+  
   return (
     <div>
       <Dashboard />

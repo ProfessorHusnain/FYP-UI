@@ -3,14 +3,34 @@
 import type { ChartConfiguration } from "chart.js";
 import ChartComponent from "./ChartComponent";
 import { Suspense } from "react";
+import compareDates from "@/utils";
+const data = compareDates(
+  new Date("2024-03-25T08:00:00"),
+  new Date("2024-05-02T18:00:00")
+);
+
+function generateRandomArray(
+  length: number,
+  min: number,
+  max: number
+): number[] {
+  const randomArray: number[] = [];
+  for (let i = 0; i < length; i++) {
+    const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+    randomArray.push(randomNumber);
+  }
+  console.log(randomArray);
+  return randomArray;
+}
+
 const LineChartData = {
   type: "line",
   data: {
-    labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+    labels: data.x_axis,
     datasets: [
       {
         label: "Card Created Time",
-        data: [12, 19, 3, 5, 2, 3],
+        data: generateRandomArray(data.x_axis.length, 0, 100),
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",
           "rgba(54, 162, 235, 0.2)",
@@ -33,18 +53,6 @@ const LineChartData = {
     ],
   },
   options: {
-    // maintainAspectRatio: false,
-    //responsive: true,
-
-    /*layout: {
-          padding: {
-            left: 50,
-            right: 50,
-            top: 50,
-            bottom: 50,
-          },
-        },*/
-
     animations: {
       tension: {
         duration: 8000,
@@ -79,7 +87,6 @@ const LineChartData = {
           boxWidth: 0,
         },
       },
-
       title: {
         display: true,
         text: "Custom Chart Title",
