@@ -98,3 +98,4 @@ const date3 = new Date("2024-03-25T08:00:00");
 const date4 = new Date("2024-03-26T08:00:00");
 console.log(dateDiffInDays(date3, date4)); // Output: 1
 */
+

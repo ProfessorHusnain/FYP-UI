@@ -1,7 +1,9 @@
 "use client";
 import { GET } from "@/lib/CommunicationHelper";
 import React, { useEffect } from "react";
+import LineChart from "@/components/charts/LineChart";
 import compareDates from "@/utils";
+import BarChart from "./charts/BarChart";
 const Dashboard = () => {
   const btn = () => {
     // Example usage:
@@ -21,9 +23,27 @@ const Dashboard = () => {
   };
   return (
     <div>
-      <button onClick={btn}>Get</button>
+      <div className="flex flex-col items-center md:flex-row gap-5">
+        <Card title="Yearly Report of Indentity">
+          <BarChart />
+        </Card>
+        <Card title="Monthly Report of Indentity">
+          <LineChart />
+        </Card>
+      </div>
     </div>
   );
 };
 
 export default Dashboard;
+
+const Card = ({ children, title }: { children: any; title: string }) => {
+  return (
+    <div className="w-full p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+      <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+        {title}
+      </h5>
+      <div>{children}</div>
+    </div>
+  );
+};

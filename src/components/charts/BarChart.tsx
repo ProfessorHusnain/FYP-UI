@@ -1,52 +1,58 @@
 // Code for BarChart component:
-
 import type { ChartConfiguration } from "chart.js";
 import ChartComponent from "./ChartComponent";
 import { Suspense } from "react";
-const BarChartData = {
-  type: "bar",
-  data: {
-    labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-    datasets: [
-      {
-        label: "# of Votes",
-        data: [12, 19, 3, 5, 2, 3],
-        backgroundColor: [
-          "rgba(255, 99, 132, 0.2)",
-          "rgba(54, 162, 235, 0.2)",
-          "rgba(255, 206, 86, 0.2)",
-          "rgba(75, 192, 192, 0.2)",
-          "rgba(153, 102, 255, 0.2)",
-          "rgba(255, 159, 64, 0.2)",
-        ],
-        borderColor: [
-          "rgba(255, 99, 132, 1)",
-          "rgba(54, 162, 235, 1)",
-          "rgba(255, 206, 86, 1)",
-          "rgba(75, 192, 192, 1)",
-          "rgba(153, 102, 255, 1)",
-          "rgba(255, 159, 64, 1)",
-        ],
-        borderWidth: 1,
-      },
-    ],
-  },
-    options: {
-      
-    scales: {
-      y: {
-        beginAtZero: true,
-      },
-    },
-  },
-};
+import compareDates from "@/utils";
+import { useNavigation } from "@/hooks/AppContext";
+import useChartDataBuilder from "@/hooks/ChartDataBuilder";
+const data = compareDates(
+  new Date("2024-03-25T08:00:00"),
+  new Date("2024-07-02T18:00:00")
+);
 
 const BarChart = () => {
+  const { plugins, backgroundColor, borderColor, hey } = useChartDataBuilder();
+  const BarChartData = {
+    type: "bar",
+    data: {
+      labels: data.x_axis,
+      datasets: [
+        {
+          label: "Scanned",
+          data: [12, 19, 3, 5, 2, 3],
+          backgroundColor: backgroundColor,
+          borderColor: borderColor,
+          borderWidth: 3,
+          fill: true,
+        },
+      ],
+    },
+    options: {
+      maintainAspectRatio: false,
+      responsive: true,
+      animations: {
+        tension: {
+          duration: 8000,
+          easing: "linear",
+          from: 1,
+          to: 0,
+          loop: true,
+          delay: 1000,
+        },
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
+      },
+      plugins: plugins,
+    },
+  };
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<div className="">Loading...</div>}>
       <ChartComponent
-        data={BarChartData.data}
-        options={BarChartData.options}
+        data={BarChartData.data as ChartConfiguration["data"]}
+        options={BarChartData.options as ChartConfiguration["options"]}
         type={BarChartData.type as ChartConfiguration["type"]}
       />
     </Suspense>
@@ -54,5 +60,3 @@ const BarChart = () => {
 };
 
 export default BarChart;
-
- 
