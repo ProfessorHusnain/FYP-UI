@@ -9,7 +9,7 @@ const LineChartData = {
     labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
     datasets: [
       {
-        label: "# of Votes",
+        label: "Card Created Time",
         data: [12, 19, 3, 5, 2, 3],
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",
@@ -27,14 +27,65 @@ const LineChartData = {
           "rgba(153, 102, 255, 1)",
           "rgba(255, 159, 64, 1)",
         ],
-        borderWidth: 1,
+        borderWidth: 3,
+        fill: true,
       },
     ],
   },
   options: {
+    // maintainAspectRatio: false,
+    //responsive: true,
+
+    /*layout: {
+          padding: {
+            left: 50,
+            right: 50,
+            top: 50,
+            bottom: 50,
+          },
+        },*/
+
+    animations: {
+      tension: {
+        duration: 8000,
+        easing: "linear",
+        from: 1,
+        to: 0,
+        loop: true,
+        delay: 1000,
+      },
+    },
     scales: {
       y: {
         beginAtZero: true,
+      },
+    },
+    plugins: {
+      interaction: {
+        intersect: false,
+        mode: "index",
+      },
+      tooltips: {
+        mode: "index",
+        axis: "x",
+      },
+      legend: {
+        display: false,
+        align: "start",
+        position: "top",
+        labels: {
+          color: "white", // This is the legend color change with primary
+          boxHeight: 0,
+          boxWidth: 0,
+        },
+      },
+
+      title: {
+        display: true,
+        text: "Custom Chart Title",
+        font: {
+          size: 20,
+        },
       },
     },
   },
@@ -44,8 +95,8 @@ const LineChart = () => {
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <ChartComponent
-        data={LineChartData.data}
-        options={LineChartData.options}
+        data={LineChartData.data as ChartConfiguration["data"]}
+        options={LineChartData.options as ChartConfiguration["options"]}
         type={LineChartData.type as ChartConfiguration["type"]}
       />
     </Suspense>
